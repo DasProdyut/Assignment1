@@ -1,0 +1,520 @@
+<mvc:View controllerName="com.gyansysHomeassignment.controller.Root" xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" 
+	xmlns="sap.m" 
+    xmlns:layout="sap.ui.layout" 
+    xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar" 
+	xmlns:vm="sap.ui.comp.variants" 
+	xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:ui="sap.ui.table">
+	<App id="app">
+		<pages>
+			<Page title="{i18n>title}">
+				<content>
+				<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}">
+				<!-- DynamicPage Title -->
+				<f:title>
+					<f:DynamicPageTitle>
+						<f:heading>
+							<vm:VariantManagement standardItemText="Standard"></vm:VariantManagement>
+						</f:heading>
+						<f:actions>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://action" type="Transparent"/>
+						</f:actions>
+					</f:DynamicPageTitle>
+				</f:title>
+				<!-- DynamicPage Header -->
+				<f:header>
+					<f:DynamicPageHeader pinnable="true" class="sapUiResponsiveMargin" width="auto">
+						<f:content>
+							<fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
+								<fb:filterItems>
+									<fb:FilterItem name="A" label="Section/Department">
+										<fb:control>
+											<Select id="slSection" forceSelection="true" change="onSelectChange" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+									<fb:FilterItem name="B" label="Projects">
+										<fb:control>
+											<Select id="slProjects" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+									<fb:FilterItem name="C" label="WBS">
+										<fb:control>
+											<Select id="slWBS" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+									<fb:FilterItem name="D" label="Posting Date Range">
+										<fb:control>
+											<Select id="slPostDR" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+									<fb:FilterItem name="E" label="Purchase Order">
+										<fb:control>
+											<Select id="slPurchaseOrder" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+									<fb:FilterItem name="F" label="G/L Account">
+										<fb:control>
+											<Select id="slAccount" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+									<fb:FilterItem name="G" label="Status">
+										<fb:control>
+											<Select id="slStatus" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+										<fb:FilterItem name="H" label="Project Type">
+										<fb:control>
+											<Select id="slProjectType" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+												<core:Item key="{key}" text="{name}"/>
+											</Select>
+										</fb:control>
+									</fb:FilterItem>
+										<fb:FilterItem name="I" label="Description">
+											<fb:control>
+												<Select id="slDescription" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+													<core:Item key="{key}" text="{name}"/>
+												</Select>
+											</fb:control>
+									    </fb:FilterItem>
+									    <fb:FilterItem name="J" label="ApprovalDate">
+											<fb:control>
+												<Select id="slApprovalDate" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+													<core:Item key="{key}" text="{name}"/>
+												</Select>
+											</fb:control>
+									    </fb:FilterItem>
+									    <fb:FilterItem name="K" label="Originator">
+											<fb:control>
+												<Select id="slOriginator" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+													<core:Item key="{key}" text="{name}"/>
+												</Select>
+											</fb:control>
+									    </fb:FilterItem>
+									     <fb:FilterItem name="L" label="S-P">
+											<fb:control>
+												<Select id="slS-P" change="onSelectChange" forceSelection="true" items="{ path: '/' }">
+													<core:Item key="{key}" text="{name}"/>
+												</Select>
+											</fb:control>
+									    </fb:FilterItem>
+								</fb:filterItems>
+							</fb:FilterBar>
+						</f:content>
+					</f:DynamicPageHeader>
+				</f:header>
+				   <f:content>   
+					<Table id="MainTable" class="sapUiSizeCompact" alternateRowColors="true" inset="false" visible="false" items="{/headerList}">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Contract List"></Title>
+								<ToolbarSpacer></ToolbarSpacer>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+                            <Column width="2rem"></Column>
+							<Column id="column0">
+								<header>
+									<Label text="Proj" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column1">
+								<header>
+									<Label text="Object" id="label1"/>
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="ObjectDes" id="label2"/>
+								</header>
+							</Column>
+                            <Column id="column3">
+								<header>
+									<Label text="ObjectTyp" id="label3"/>
+								</header>
+							</Column>
+                            <Column id="column4">
+								<header>
+									<Label text="BudgetNo" id="label4"/>
+								</header>
+							</Column>
+                            <Column id="column5">
+								<header>
+									<Label text="Orig" id="label5"/>
+								</header>
+							</Column>
+                             <Column id="column6">
+								<header>
+									<Label text="VendName" id="label6"/>
+								</header>
+							</Column>
+                            <Column id="column7">
+								<header>
+									<Label text="CostEle" id="label7"/>
+								</header>
+							</Column>
+                            <Column id="column8">
+								<header>
+									<Label text="Department" id="label8"/>
+								</header>
+							</Column>
+							<Column >
+								<header>
+									<Label text="Status"/>
+								</header>
+							</Column>
+							
+							<Column minScreenWidth="1370px" demandPopin="true" visible="true"></Column>
+						</columns>
+						<items>
+							<ColumnListItem id="item0">                            
+								<cells>
+                                <core:Icon src="sap-icon://expand" press="onRowShiftAction"></core:Icon>
+									<Text text="{Proj}"/>
+									<Text text="{Object}"/>
+									<Text text="{ObjectDes}"/>
+                                    <Text text="{ObjectTyp}"/>
+                                    <Text text="{BudgetNo}"/>
+                                    <Text text="{Orig}"/>
+                                    <Text text="{VendName}"/>
+                                    <Text text="{CostEle}"/>
+                                    <Text text="{Department}"/>
+									<Text text="{status}"/>									
+									<ui:Table rows="{itemsList}" selectionMode="None"  visibleRowCount="3" paste="onPaste" visible="false">				
+                                        <ui:columns>                                            
+                                            <ui:Column width="8rem">  
+                                                <ui:template> 
+                                                <core:Icon src="sap-icon://expand" press="onRowShiftAction1"></core:Icon>                                             
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Object" />
+                                                <ui:template>
+                                                    <Text text="{Object}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ObjectDes" />
+                                                <ui:template>
+                                                    <Text text="{ObjectDes}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ObjectTyp" />
+                                                <ui:template>
+                                                    <Text text="{ObjectTyp}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Orig" />
+                                                <ui:template>
+                                                    <Text text="{Orig}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="VendName" />
+                                                <ui:template>
+                                                    <Text text="{VendName}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="CostEle" />
+                                                <ui:template>
+                                                    <Text text="{CostEle}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Department" />
+                                                <ui:template>
+                                                    <Text text="{Department}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Obudget" />
+                                                <ui:template>
+                                                    <Text text="{Obudget}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetSup" />
+                                                <ui:template>
+                                                    <Text text="{BudgetSup}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetTrf" />
+                                                <ui:template>
+                                                    <Text text="{BudgetTrf}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetRed" />
+                                                <ui:template>
+                                                    <Text text="{BudgetRed}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetAdj" />
+                                                <ui:template>
+                                                    <Text text="{BudgetAdj}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="CommAmt" />
+                                                <ui:template>
+                                                    <Text text="{CommAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Actual" />
+                                                <ui:template>
+                                                    <Text text="{Actual}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="AgnAmt" />
+                                                <ui:template>
+                                                    <Text text="{AgnAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="AvaAmt" />
+                                                <ui:template>
+                                                    <Text text="{AvaAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Uti" />
+                                                <ui:template>
+                                                    <Text text="{Uti}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="OrgComm" />
+                                                <ui:template>
+                                                    <Text text="{OrgComm}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ConAmt" />
+                                                <ui:template>
+                                                    <Text text="{ConAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ConNtSpend" />
+                                                <ui:template>
+                                                    <Text text="{ConNtSpend}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="TotFlag" />
+                                                <ui:template>
+                                                    <Text text="{TotFlag}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>                                        
+                                        <!-- <ui:Table rows="{itemsList1}" selectionMode="None"  visibleRowCount="3" visible="false">				
+                                        <ui:columns>                                  
+                                            <ui:Column width="8rem">
+                                                <Label text="Object" />
+                                                <ui:template>
+                                                    <Text text="{Object}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ObjectDes" />
+                                                <ui:template>
+                                                    <Text text="{ObjectDes}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ObjectTyp" />
+                                                <ui:template>
+                                                    <Text text="{ObjectTyp}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Orig" />
+                                                <ui:template>
+                                                    <Text text="{Orig}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="VendName" />
+                                                <ui:template>
+                                                    <Text text="{VendName}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="CostEle" />
+                                                <ui:template>
+                                                    <Text text="{CostEle}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Department" />
+                                                <ui:template>
+                                                    <Text text="{Department}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Obudget" />
+                                                <ui:template>
+                                                    <Text text="{Obudget}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetSup" />
+                                                <ui:template>
+                                                    <Text text="{BudgetSup}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetTrf" />
+                                                <ui:template>
+                                                    <Text text="{BudgetTrf}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetRed" />
+                                                <ui:template>
+                                                    <Text text="{BudgetRed}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="BudgetAdj" />
+                                                <ui:template>
+                                                    <Text text="{BudgetAdj}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="CommAmt" />
+                                                <ui:template>
+                                                    <Text text="{CommAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Actual" />
+                                                <ui:template>
+                                                    <Text text="{Actual}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="AgnAmt" />
+                                                <ui:template>
+                                                    <Text text="{AgnAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="AvaAmt" />
+                                                <ui:template>
+                                                    <Text text="{AvaAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="Uti" />
+                                                <ui:template>
+                                                    <Text text="{Uti}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="OrgComm" />
+                                                <ui:template>
+                                                    <Text text="{OrgComm}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ConAmt" />
+                                                <ui:template>
+                                                    <Text text="{ConAmt}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="ConNtSpend" />
+                                                <ui:template>
+                                                    <Text text="{ConNtSpend}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                            <ui:Column width="8rem">
+                                                <Label text="TotFlag" />
+                                                <ui:template>
+                                                    <Text text="{TotFlag}" wrapping="false" />
+                                                </ui:template>
+                                            </ui:Column>
+                                        </ui:columns>
+                                    </ui:Table> -->
+                                    <!-- <Table items="{path:'itemsList1', templateShareable:false}" visible="false" mode="MultiSelect">
+										<ColumnListItem >
+											<cells>
+												<Text text="{Object}"/>
+												<Text text="{ObjectDes}"/>
+												<Text text="{ObjectTyp}"/>
+												<Text text="{Orig}"/>
+												<Text text="{Deaprtment}"/>
+												<Text text="{VendName}"/>
+											</cells>
+										</ColumnListItem>
+										<columns>
+											<Column>
+												<header>
+													<Label text="Item No"/>
+												</header>
+											</Column>
+											<Column>
+												<header>
+													<Label text="Material"/>
+												</header>
+											</Column>
+											<Column>
+												<header>
+													<Label text="Qty"/>
+												</header>
+											</Column>
+											<Column>
+												<header>
+													<Label text="Price"/>
+												</header>
+											</Column>
+											<Column>
+												<header>
+													<Label text="Ship to Party"/>
+												</header>
+											</Column>
+											<Column>
+												<header>
+													<Label text="Incoterm"/>
+												</header>
+											</Column>
+										</columns>
+									</Table> -->
+                                    </ui:columns>
+                                    </ui:Table>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</f:content>
+			</f:DynamicPage>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
